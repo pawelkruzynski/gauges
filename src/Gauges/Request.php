@@ -359,7 +359,7 @@ class Request implements LoggerAwareInterface
      *
      * @return GuzzleHttp\Psr7\Response
      */
-    public function top_content($id, $date = null, $page = null)
+    public function top_content($id, $date = null, $page = null, $group = null)
     {
         $params = array();
 
@@ -370,9 +370,13 @@ class Request implements LoggerAwareInterface
         if (isset($page)) {
             $params['page'] = (int) $page;
         }
+        
+        if (isset($group)) {
+            $params['group'] = (string) $group;
+        }
 
         return $this->makeApiCall('GET', 'gauges/' . $id . '/content', $params);
-    }
+    }   
 
     /**
      * Top Referrers
@@ -385,7 +389,7 @@ class Request implements LoggerAwareInterface
      *
      * @return GuzzleHttp\Psr7\Response
      */
-    public function top_referrers($id, $date = null, $page = null)
+    public function top_referrers($id, $date = null, $page = null, $group = null)
     {
         $params = array();
 
@@ -395,6 +399,10 @@ class Request implements LoggerAwareInterface
 
         if (isset($page)) {
             $params['page'] = (int) $page;
+        }
+        
+        if (isset($group)) {
+            $params['group'] = (string) $group;
         }
 
         return $this->makeApiCall('GET', 'gauges/' . $id . '/referrers', $params);
